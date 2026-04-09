@@ -15,6 +15,7 @@ let ItemPool=createPool([
     {name:"Three",weight:.5},
     {name:"Four",weight:.25},
     {name:"Five",weight:.3},
+    {name:"Seis",weight:.45},
 ])
 
 const resultid=document.getElementById("result")
