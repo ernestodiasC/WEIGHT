@@ -1,32 +1,36 @@
-let ItemPool={
-    list:[
-        {name:"One",weight:1},
-        {name:"Two",weight:.5},
-        {name:"Three",weight:.5},
-        {name:"Four",weight:.25},
-        {name:"Five",weight:.3},
-        {name:"Six",weight:.4},
-    ],
+createPool=function(_list){
+    let _s={
+        list:_list,
+        max_weight:0,
+    }
+    for(let i=0;i<_s.list.length;i++){
+        _s.max_weight+=_s.list[i].weight
+    }
+    return _s
 }
-ItemPool.max_weight=0
-for(let i=0;i<ItemPool.list.length;i++){
-    ItemPool.max_weight+=ItemPool.list[i].weight
-}
+
+let ItemPool=createPool([
+    {name:"One",weight:1},
+    {name:"Two",weight:.5},
+    {name:"Three",weight:.5},
+    {name:"Four",weight:.25},
+    {name:"Five",weight:.3},
+])
 
 const resultid=document.getElementById("result")
 const oddid=document.getElementById("odd")
 
-getItem=function(){
-    let random=Math.random()*ItemPool.max_weight
+getItem=function(_pool){
+    let random=Math.random()*_pool.max_weight
     let i=0
     while(true){
-        random-=ItemPool.list[i].weight
+        random-=_pool.list[i].weight
         if(random<0){
-            oddid.textContent=ItemPool.list[i].weight/ItemPool.max_weight*100
+            resultid.textContent=_pool.list[i].name
+            oddid.textContent=Math.round(_pool.list[i].weight/ItemPool.max_weight*100)
             oddid.textContent+="%"
-            resultid.textContent=ItemPool.list[i].name
-            console.log(ItemPool.list[i])
-            return ItemPool.list[i]
+            console.log(_pool.list[i])
+            return _pool.list[i]
         }
         i=i+1
     }
