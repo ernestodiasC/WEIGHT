@@ -16,6 +16,10 @@ let ItemPool=createPool([
     {name:"Four",weight:.25},
     {name:"Five",weight:.3},
     {name:"Seis",weight:.45},
+    {name:"Sete",weight:.1},
+    {name:"Oito",weight:.333},
+    {name:"Nine",weight:.9},
+    {name:"Ten",weight:.75},
 ])
 
 const resultid=document.getElementById("result")
@@ -27,12 +31,16 @@ getItem=function(_pool){
     while(true){
         random-=_pool.list[i].weight
         if(random<0){
-            resultid.textContent=_pool.list[i].name
-            oddid.textContent=Math.round(_pool.list[i].weight/ItemPool.max_weight*100)
-            oddid.textContent+="%"
-            console.log(_pool.list[i])
             return _pool.list[i]
         }
         i=i+1
     }
+}
+
+getItemHTML=function(){
+    let _i=getItem(ItemPool)
+    resultid.textContent=_i.name
+    oddid.textContent=Math.round(_i.weight/ItemPool.max_weight*100)
+    oddid.textContent+="%"
+    console.debug(_i)
 }
